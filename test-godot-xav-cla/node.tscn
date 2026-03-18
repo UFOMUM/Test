@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d8hmuvc7dsfk"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nxiqb"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 980, 0)
+color = Color(0.12118498, 0.3269845, 0.7305352, 1)
+
+[node name="Node" type="Node" unique_id=583044692]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1905776818]
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1881988457]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Node2D" unique_id=1186041875]
+amount = 100
+lifetime = 8.0
+randomness = 1.0
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_nxiqb")
