@@ -1,10 +1,28 @@
 [gd_scene format=3 uid="uid://d8hmuvc7dsfk"]
 
+[sub_resource type="CurveTexture" id="CurveTexture_nxiqb"]
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nxiqb"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+inherit_velocity_ratio = 1.0
+spread = 180.0
+initial_velocity_max = 15.0
 gravity = Vector3(0, 980, 0)
-color = Color(0.12118498, 0.3269845, 0.7305352, 1)
+linear_accel_min = -100.0
+linear_accel_max = 99.99999
+linear_accel_curve = SubResource("CurveTexture_nxiqb")
+color = Color(0.56686664, 0.6962872, 1, 1)
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sy5k4"]
+polygon = PackedVector2Array(-8, 16, 8, 16, 0, 8)
 
 [node name="Node" type="Node" unique_id=583044692]
 
@@ -13,8 +31,22 @@ color = Color(0.12118498, 0.3269845, 0.7305352, 1)
 [node name="Node2D" type="Node2D" parent="." unique_id=1881988457]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Node2D" unique_id=1186041875]
-amount = 100
+emitting = false
+amount = 10000
 lifetime = 8.0
 randomness = 1.0
 fixed_fps = 0
+collision_base_size = 0.0
 process_material = SubResource("ParticleProcessMaterial_nxiqb")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=36842872]
+position = Vector2(0, 8)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=1470443475]
+position = Vector2(-16, 24)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="." unique_id=1377374054]
+position = Vector2(16, 24)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
