@@ -1,28 +1,72 @@
 [gd_scene format=3 uid="uid://d8hmuvc7dsfk"]
 
+[ext_resource type="Texture2D" uid="uid://3tq7nuhpw3ng" path="res://brackeys_platformer_assets/sprites/coin.png" id="1_sy5k4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j2q8x"]
+particles_animation = true
+particles_anim_h_frames = 12
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_nxiqb"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_nxiqb"]
+curve = SubResource("Curve_nxiqb")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nxiqb"]
-lifetime_randomness = 1.0
+particle_flag_align_y = true
+particle_flag_rotate_y = true
 particle_flag_disable_z = true
 angle_min = 1.0728835e-05
 angle_max = 360.00003
-inherit_velocity_ratio = 1.0
 spread = 180.0
-initial_velocity_max = 15.0
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+angular_velocity_min = -10.000016
+angular_velocity_max = 9.999984
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 19.999977
 gravity = Vector3(0, 980, 0)
-linear_accel_min = -100.0
+linear_accel_min = -2.2351742e-06
 linear_accel_max = 99.99999
 linear_accel_curve = SubResource("CurveTexture_nxiqb")
 color = Color(0.56686664, 0.6962872, 1, 1)
 hue_variation_min = -1.0
 hue_variation_max = 0.99999994
+turbulence_noise_speed_random = 0.1
+collision_mode = 1
+collision_friction = 0.2
+collision_bounce = 0.2
+
+[sub_resource type="CurveTexture" id="CurveTexture_112p8"]
+curve = SubResource("Curve_nxiqb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e2u21"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+angular_velocity_min = -10.000016
+angular_velocity_max = 9.999984
+gravity = Vector3(0, 980, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 99.99999
+linear_accel_curve = SubResource("CurveTexture_112p8")
+color = Color(0.56686664, 0.6962872, 1, 1)
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
 collision_mode = 1
 collision_friction = 0.0
-collision_bounce = 0.0
+collision_bounce = 1.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sy5k4"]
-polygon = PackedVector2Array(-8, 16, 8, 16, 0, 8)
+polygon = PackedVector2Array(-16, 8, 0, 24, 16, 8, 0, -8)
 
 [node name="Node" type="Node" unique_id=583044692]
 
@@ -31,22 +75,256 @@ polygon = PackedVector2Array(-8, 16, 8, 16, 0, 8)
 [node name="Node2D" type="Node2D" parent="." unique_id=1881988457]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Node2D" unique_id=1186041875]
-emitting = false
-amount = 10000
+material = SubResource("CanvasItemMaterial_j2q8x")
+amount = 100
+texture = ExtResource("1_sy5k4")
 lifetime = 8.0
 randomness = 1.0
 fixed_fps = 0
-collision_base_size = 0.0
+collision_base_size = 0.1
 process_material = SubResource("ParticleProcessMaterial_nxiqb")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=36842872]
-position = Vector2(0, 8)
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="Node2D" unique_id=726354518]
+position = Vector2(-560, -16)
+emitting = false
+amount = 10000
+texture = ExtResource("1_sy5k4")
+lifetime = 8.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_e2u21")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Node2D" unique_id=1977577855]
+material = SubResource("CanvasItemMaterial_j2q8x")
+position = Vector2(-48, 0)
+amount = 100
+texture = ExtResource("1_sy5k4")
+lifetime = 8.0
+randomness = 1.0
+fixed_fps = 0
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_nxiqb")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Node2D" unique_id=414331537]
+material = SubResource("CanvasItemMaterial_j2q8x")
+position = Vector2(48, 0)
+amount = 100
+texture = ExtResource("1_sy5k4")
+lifetime = 8.0
+randomness = 1.0
+fixed_fps = 0
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_nxiqb")
+
+[node name="Node" type="Node" parent="." unique_id=505441728]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Node" unique_id=36842872]
+position = Vector2(0, 16)
 occluder = SubResource("OccluderPolygon2D_sy5k4")
 
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=1470443475]
-position = Vector2(-16, 24)
+[node name="LightOccluder2D14" type="LightOccluder2D" parent="Node" unique_id=1561969943]
+position = Vector2(48, 16)
 occluder = SubResource("OccluderPolygon2D_sy5k4")
 
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="." unique_id=1377374054]
-position = Vector2(16, 24)
+[node name="LightOccluder2D15" type="LightOccluder2D" parent="Node" unique_id=1603258862]
+position = Vector2(72, 40)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D16" type="LightOccluder2D" parent="Node" unique_id=1293561919]
+position = Vector2(96, 64)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D50" type="LightOccluder2D" parent="Node" unique_id=148730921]
+position = Vector2(96, 112)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D51" type="LightOccluder2D" parent="Node" unique_id=188361691]
+position = Vector2(96, 208)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D52" type="LightOccluder2D" parent="Node" unique_id=2047359532]
+position = Vector2(-96, 208)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D11" type="LightOccluder2D" parent="Node" unique_id=1630981015]
+position = Vector2(-48, 16)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D12" type="LightOccluder2D" parent="Node" unique_id=762399306]
+position = Vector2(-72, 40)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D13" type="LightOccluder2D" parent="Node" unique_id=1604900812]
+position = Vector2(-96, 64)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D53" type="LightOccluder2D" parent="Node" unique_id=1436850006]
+position = Vector2(-560, 8)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="Node" unique_id=1470443475]
+position = Vector2(-24, 40)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="Node" unique_id=1377374054]
+position = Vector2(24, 40)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="Node" unique_id=1294397326]
+position = Vector2(0, 64)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="Node" unique_id=283785583]
+position = Vector2(-48, 64)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D6" type="LightOccluder2D" parent="Node" unique_id=894345079]
+position = Vector2(48, 64)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D7" type="LightOccluder2D" parent="Node" unique_id=210490311]
+position = Vector2(24, 88)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D10" type="LightOccluder2D" parent="Node" unique_id=2050655311]
+position = Vector2(72, 88)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D8" type="LightOccluder2D" parent="Node" unique_id=326502943]
+position = Vector2(-24, 88)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D9" type="LightOccluder2D" parent="Node" unique_id=1614852629]
+position = Vector2(-72, 88)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D49" type="LightOccluder2D" parent="Node" unique_id=1993595561]
+position = Vector2(-96, 112)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D17" type="LightOccluder2D" parent="Node" unique_id=220103176]
+position = Vector2(0, 112)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D18" type="LightOccluder2D" parent="Node" unique_id=2042173819]
+position = Vector2(48, 112)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D19" type="LightOccluder2D" parent="Node" unique_id=798127565]
+position = Vector2(72, 136)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D20" type="LightOccluder2D" parent="Node" unique_id=1583740869]
+position = Vector2(96, 160)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D21" type="LightOccluder2D" parent="Node" unique_id=1758597255]
+position = Vector2(-48, 112)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D22" type="LightOccluder2D" parent="Node" unique_id=1351246407]
+position = Vector2(-72, 136)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D23" type="LightOccluder2D" parent="Node" unique_id=1767483922]
+position = Vector2(-96, 160)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D24" type="LightOccluder2D" parent="Node" unique_id=1482790583]
+position = Vector2(-24, 136)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D25" type="LightOccluder2D" parent="Node" unique_id=1106788362]
+position = Vector2(24, 136)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D26" type="LightOccluder2D" parent="Node" unique_id=1052766003]
+position = Vector2(0, 160)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D27" type="LightOccluder2D" parent="Node" unique_id=1860305418]
+position = Vector2(-48, 160)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D28" type="LightOccluder2D" parent="Node" unique_id=141834797]
+position = Vector2(48, 160)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D29" type="LightOccluder2D" parent="Node" unique_id=1255305280]
+position = Vector2(24, 184)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D30" type="LightOccluder2D" parent="Node" unique_id=401762574]
+position = Vector2(72, 184)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D31" type="LightOccluder2D" parent="Node" unique_id=1596244384]
+position = Vector2(-24, 184)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D32" type="LightOccluder2D" parent="Node" unique_id=166789013]
+position = Vector2(-72, 184)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D33" type="LightOccluder2D" parent="Node" unique_id=657119066]
+position = Vector2(0, 208)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D34" type="LightOccluder2D" parent="Node" unique_id=317048142]
+position = Vector2(48, 208)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D35" type="LightOccluder2D" parent="Node" unique_id=2042733959]
+position = Vector2(72, 232)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D36" type="LightOccluder2D" parent="Node" unique_id=961814613]
+position = Vector2(96, 256)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D37" type="LightOccluder2D" parent="Node" unique_id=981236244]
+position = Vector2(-48, 208)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D38" type="LightOccluder2D" parent="Node" unique_id=260206437]
+position = Vector2(-72, 232)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D39" type="LightOccluder2D" parent="Node" unique_id=1968608494]
+position = Vector2(-96, 256)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D40" type="LightOccluder2D" parent="Node" unique_id=1122197137]
+position = Vector2(-24, 232)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D41" type="LightOccluder2D" parent="Node" unique_id=120285568]
+position = Vector2(24, 232)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D42" type="LightOccluder2D" parent="Node" unique_id=138333382]
+position = Vector2(0, 256)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D43" type="LightOccluder2D" parent="Node" unique_id=804987386]
+position = Vector2(-48, 256)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D44" type="LightOccluder2D" parent="Node" unique_id=1875745635]
+position = Vector2(48, 256)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D45" type="LightOccluder2D" parent="Node" unique_id=358773472]
+position = Vector2(24, 280)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D46" type="LightOccluder2D" parent="Node" unique_id=92002749]
+position = Vector2(72, 280)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D47" type="LightOccluder2D" parent="Node" unique_id=843229141]
+position = Vector2(-24, 280)
+occluder = SubResource("OccluderPolygon2D_sy5k4")
+
+[node name="LightOccluder2D48" type="LightOccluder2D" parent="Node" unique_id=927470025]
+position = Vector2(-72, 280)
 occluder = SubResource("OccluderPolygon2D_sy5k4")
